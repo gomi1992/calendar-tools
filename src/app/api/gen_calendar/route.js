@@ -2,7 +2,14 @@ import {NextResponse} from "next/server";
 import {eventsToICS} from "@/libs/calendar-converter/calendar-converter";
 
 export async function POST(request) {
-    const res = await request.json();
-    const value = eventsToICS(res['start_date'], res['time_table'], res['cal_data']);
+    const calData = await request.json();
+    const value = eventsToICS(calData['start_date'], calData['time_table'], calData['cal_data']);
+    return new NextResponse(value);
+}
+
+export async function GET(request) {
+    const searchParams = request.nextUrl.searchParams;
+    const calData = eval("(" + searchParams.get('calData') + ")");
+    const value = eventsToICS(calData['start_date'], calData['time_table'], calData['cal_data']);
     return new NextResponse(value);
 }
