@@ -25,6 +25,7 @@ function calToEventList(start_date_str, time_table, cal_data) {
         let weeks = weeksToWeekList(cal_item['weeks']);
         let weekday = parseInt(cal_item['weekday']);
         let time = time_table[cal_item['time_choice']];
+
         for (let week_index in weeks) {
             let week = weeks[week_index];
             let event_date = new Date(start_date);
